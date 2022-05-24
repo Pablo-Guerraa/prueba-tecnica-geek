@@ -1,0 +1,61 @@
+.container-register{
+  height: 100vh;
+  background: linear-gradient(45deg, rgb(255, 53, 53), rgb(50, 50, 250));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.button-back {
+  padding: 30px;
+  box-shadow: 0px 0px 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  cursor: pointer;
+}
+.form {
+  width: 100vw;
+  max-width: 500px;
+  height: 90vh;
+  padding: 20px;
+  box-shadow: 0px 0px 30px black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.file-user {
+  position: relative;
+  height: 150px;
+  width: 120px;
+  border: dashed 4px #3c6481;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0% auto;
+}
+.file-user:hover {
+  background: #b8ccda;
+}
+.file-user > label {
+  cursor: pointer;
+}
+.file-user > label img{
+  height: 100px;
+}
+.file-user > input {
+  position: absolute; 
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 0%;
+  z-index: 18;
+  color: black;
+  opacity: 0;
+  cursor: pointer;
+}
