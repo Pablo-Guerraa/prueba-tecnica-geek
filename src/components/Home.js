@@ -7,6 +7,7 @@ import { getIngredient } from '../redux/actions/ProductsAction';
 import LongMenu from './LongMenu'
 import AddIcon from '@mui/icons-material/Add';
 import ModalConfirmBuy from './ModalConfirmBuy';
+import ModalAdd from './ModalAdd';
 
 export default function Home() {
 
@@ -16,6 +17,7 @@ export default function Home() {
   // const [ allChecked, setAllChecked ] = useState(false)
   const [ selectProducts, setSelectProducts ] = useState([]);
   const [ modalBuy, setModalBuy ] = useState(false);
+  const [ modalAddProduct, setModalAddProduct ] = useState(false);
   const [ subTotal, setSubTotal ] = useState(0);
   const [ totalPrice, setTotalPrice ] = useState(0);
 
@@ -47,24 +49,6 @@ export default function Home() {
       setSelectProducts(selectProducts.filter(i=> i.product !== ingredient.product))
     }
   }
-
-  const buy = (e) => {
-    e.preventDefault()
-    console.log(selectProducts);
-    setModalBuy(true)
-  }
-
-  const addProduct = () => {
-    console.log('button');
-  }
-  // const total = () => {
-  //   let sum = 0;
-  //   selectProducts.forEach((i) => sum += i.price);
-  //   console.log(sum); 
-  // }
-  // total()
-  // // console.log('total()');
-
   useEffect(()=>{
     const price = subTotalFn();
     setSubTotal(price)
@@ -85,7 +69,10 @@ export default function Home() {
         Subir Api a Firebase
       </button>
 
-      <form action="" onSubmit={(e)=>buy(e)}>
+      <form action="" onSubmit={(e)=>{
+        e.preventDefault();
+        setModalBuy(true)
+      }}>
         <section>
           <div className='container-title'>
             <p className='title-ingredients'>INGREDIENTES</p>
@@ -126,14 +113,14 @@ export default function Home() {
                 </label>
               ))
             }
-            <button type='button' className='add-product' onClick={()=>addProduct()}>Crear Producto <AddIcon/></button>
+            <button type='button' className='add-product' onClick={()=>setModalAddProduct(true)}>Crear Producto <AddIcon/></button>
           </div>
         </section>
         <section className='cotizacion'>
           <p className='cont'>Items {selectProducts.length}</p>
           <div className='cont'>
             <p>Subtotal</p>
-            <span>{ subTotal.toFixed(2) }€ </span>
+            <span>{ subTotal }€ </span>
           </div>
           <div className='cont'>
             <p>Gastos de envio</p>
@@ -141,12 +128,13 @@ export default function Home() {
           </div>
           <div className='cont'>
             <h4>Total</h4>
-            <span className='color-green'>{totalPrice.toFixed(2)} €</span>
+            <span className='color-green'>{totalPrice} €</span>
           </div>
           <button type='submit' className='btn-buy'>Comprar ingredientes: {}€</button>
         </section>
       </form>
       <ModalConfirmBuy modalBuy={modalBuy} setModalBuy={setModalBuy}/>
+      <ModalAdd  modalAddProduct={modalAddProduct} setModalAddProduct={setModalAddProduct} />
     </div>
   )
 }
