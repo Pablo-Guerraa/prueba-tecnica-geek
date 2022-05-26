@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material'
 import { getAuth, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { facebookAuthProvider, googleAuthProvider } from '../firebase/firebaseConfig';
 import { login, loginAsync } from '../redux/actions/usersAction';
 
@@ -94,6 +95,9 @@ export default function Login() {
         </form>
         <button onClick={()=>authGoogle()}>Entrar con Google</button>
         <button onClick={()=>authFacebook()}>Entrar con Facebook</button>
+        <br />
+        <NavLink to='/register' >Register</NavLink>
+
     </div>
   )
 }
