@@ -1,12 +1,59 @@
 import { Button, TextField } from '@mui/material'
+import { getAuth, signInWithPopup } from 'firebase/auth';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAsync } from '../redux/actions/usersAction';
+import { facebookAuthProvider, googleAuthProvider } from '../firebase/firebaseConfig';
+import { login, loginAsync } from '../redux/actions/usersAction';
 
 export default function Login() {
 
   const dispatch = useDispatch();
   const [objUser, setObjUser] = useState({nameUser: '', password: ''});
+
+  const authGoogle = () => {
+    const auth = getAuth();
+    signInWithPopup(auth, googleAuthProvider)
+    .then(({user}) => {
+      const objUser = {
+        userAuth: {
+          uid: user.id,
+          displayName: user.displayName,
+          email: user.email,
+          photo: null
+        },
+        routeAuth: {
+          isLoggedIn: true,
+          checking: false
+        }
+      };
+      dispatch(login(objUser));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  const authFacebook = () => {
+    const auth = getAuth();
+    signInWithPopup(auth, facebookAuthProvider)
+    .then(({user}) => {
+      const objUser = {
+        userAuth: {
+          uid: user.id,
+          displayName: user.displayName,
+          email: user.email,
+          photo: null
+        },
+        routeAuth: {
+          isLoggedIn: true,
+          checking: false
+        }
+      };
+      dispatch(login(objUser))
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
 
   return (
@@ -45,6 +92,8 @@ export default function Login() {
             Entrar
           </Button>
         </form>
+        <button onClick={()=>authGoogle()}>Entrar con Google</button>
+        <button onClick={()=>authFacebook()}>Entrar con Facebook</button>
     </div>
   )
 }

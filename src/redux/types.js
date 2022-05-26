@@ -4,3 +4,10 @@ export const typeUsers = {
   login: 'LOGIN',
   logout: 'LOGOUT',
 }
+
+export const typeProducts = {
+  get: 'PEDIR',
+  add: 'AGREGAR',
+  delete: 'ELIMINAR',
+  edit: 'EDITAR',
+}

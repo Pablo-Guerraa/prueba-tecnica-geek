@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, si
 import { app } from '../../firebase/firebaseConfig';
 import {typeUsers} from '../types';
 
-const login = (userAuth) => ({
+export const login = (userAuth) => ({
   type: typeUsers.login,
   payload: userAuth
 })
@@ -19,8 +19,6 @@ export const loginAsync = (dataUser)=> async(dispatch)=> {
     const auth = getAuth();
     console.log(app);
     const signIn = await signInWithEmailAndPassword(auth, dataUser.nameUser, dataUser.password);
-    console.log(signIn);
-    // Le paso el objeto al reducers ya listo 
   const destructuredUser = {
     userAuth: {
       uid : signIn.user.uid,
@@ -47,7 +45,6 @@ export const registerAsync = (dataUser) => async(dispatch) => {
     displayName: dataUser.displayName, photoURL: 'https://res.cloudinary.com/dxhgejzwc/image/upload/v1652161956/sprint-3-proyecto/asesor2_m7zf4e.png'
   })
   // nota: Tener en cuanta que la sentencia try/catch o .then/.catch no funciona con peticiones de firebase 
-  // Le paso el objeto al reducers ya listo 
   const destructuredUser = {
     userAuth: {
       uid : regUser.user.uid,
